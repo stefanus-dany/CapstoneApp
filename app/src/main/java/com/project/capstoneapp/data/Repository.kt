@@ -64,8 +64,8 @@ class Repository(
     private val _toastText = MutableLiveData<String>()
     val toastText: LiveData<String> = _toastText
 
-    private val _historyActivityResponse = MutableLiveData<HistoryActivityResponse?>()
-    val historyActivityResponse: LiveData<HistoryActivityResponse?> = _historyActivityResponse
+    private val _historyActivityResponse = MutableLiveData<List<HistoryActivityResponse>?>()
+    val historyActivityResponse: LiveData<List<HistoryActivityResponse>?> = _historyActivityResponse
 
     fun register(
         name: String,
@@ -333,28 +333,19 @@ class Repository(
         }
     }
 
+    // for getting the history (method get)
     suspend fun getHistoryActivity(
         userId: String,
         token: String,
-        activityRequest: HistoryActivityRequest
     ) {
         _isLoading.value = true
         _toastText.value = ""
 
-        val dataJsonObject = JSONObject().apply {
-            put("jenis", activityRequest.jenis)
-            put("name", activityRequest.name)
-            put("durasi_menit", activityRequest.durasi_menit)
-            put("calorie", activityRequest.calorie)
-            put("created_at", activityRequest.created_at)
-        }
-        val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), dataJsonObject.toString())
-
         try {
-            val response = apiServiceMain.getHistoryActivity(userId, "Bearer $token", requestBody)
+            val response = apiServiceMain.getHistoryActivity( "Bearer $token", userId)
             if (response.isSuccessful) {
                 val historyActivityResponse = response.body()
-                if (historyActivityResponse?.id != null) {
+                if (historyActivityResponse != null) {
                     _historyActivityResponse.value = historyActivityResponse
                     Log.d(TAG, "onSuccess: History activity created")
                 } else {

@@ -90,6 +90,7 @@ dependencies {
 
     // Table View
     implementation 'com.github.ISchwarz23:SortableTableView:2.8.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'

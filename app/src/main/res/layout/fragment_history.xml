@@ -22,163 +22,65 @@
             app:title="@string/title_history"
             app:titleTextColor="@color/white" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_spinner"
+            style="@style/ExposedDropdownMenu"
+            android:layout_width="@dimen/_130sdp"
+            app:layout_constraintTop_toBottomOf="@id/layout_app_bar"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/_16sdp"
-            app:layout_constraintTop_toBottomOf="@id/layout_app_bar">
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_20sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_20sdp"
+            app:boxCornerRadiusTopStart="@dimen/_20sdp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/ExposedDropdownMenu"
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:orientation="horizontal"
-                app:boxCornerRadiusBottomEnd="@dimen/_20sdp"
-                app:boxCornerRadiusBottomStart="@dimen/_20sdp"
-                app:boxCornerRadiusTopEnd="@dimen/_20sdp"
-                app:boxCornerRadiusTopStart="@dimen/_20sdp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/spinner_month"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:paddingStart="@dimen/_16sdp"
-                    android:paddingEnd="@dimen/_16sdp"
-                    android:text="December" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_date"
+            <AutoCompleteTextView
+                android:id="@+id/spinner_month"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                tools:listitem="@layout/item_date_list"/>
+                android:inputType="none"
+                android:paddingStart="@dimen/_16sdp"
+                android:paddingEnd="@dimen/_16sdp"
+                tools:text="06/15/2023" />
 
-            <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/hsvFood"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@id/hsvExercise"
+            app:layout_constraintTop_toBottomOf="@id/til_spinner"
+            android:layout_height="wrap_content">
+
+            <de.codecrafters.tableview.TableView
+                android:id="@+id/tableViewFood"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:orientation="vertical"
-                android:background="@drawable/background_rounded_outlined_grey_filled_yellow">
+                android:layout_height="250dp"/>
+        </HorizontalScrollView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+        <HorizontalScrollView
+            android:id="@+id/hsvExercise"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hsvFood"
+            android:layout_height="250dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Food"
-                        android:textStyle="bold"
-                        android:layout_weight="2"
-                        android:layout_marginEnd="@dimen/_16sdp"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Time"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:id="@+id/tv_total_cal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="540 cal"
-                        android:textStyle="bold"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_8sdp"
-                    android:background="@drawable/background_rounded_outlined_grey"
-                    android:orientation="horizontal">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_food_home"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_home_food_list"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
+            <de.codecrafters.tableview.TableView
+                android:id="@+id/tableViewExercise"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:orientation="vertical"
-                android:background="@drawable/background_rounded_outlined_grey_filled_yellow">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Activity"
-                        android:textStyle="bold"
-                        android:layout_weight="2"
-                        android:layout_marginEnd="@dimen/_16sdp"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Time"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="475,5 cal"
-                        android:textStyle="bold"
-                        android:layout_marginStart="@dimen/_16sdp"
-                        android:textColor="@color/black"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_8sdp"
-                    android:background="@drawable/background_rounded_outlined_grey"
-                    android:orientation="horizontal">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_activity_home"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/item_home_activity_list"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
+                android:layout_height="250dp"/>
+        </HorizontalScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </ScrollView>

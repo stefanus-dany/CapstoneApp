@@ -43,5 +43,11 @@ interface ApiServiceMain {
         @Part ("data") activityRequest: RequestBody
     ): Response<HistoryActivityResponse>
 
+    @GET("api/history/user/{id}")
+    suspend fun getHistoryActivity(
+        @Header("Authorization") token: String,
+        @Path("id") userId: String,
+    ): Response<List<HistoryActivityResponse>>
+
 }
 

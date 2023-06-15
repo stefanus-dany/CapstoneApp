@@ -17,20 +17,30 @@ class HistoryActivityResponseDeserializer : JsonDeserializer<HistoryActivityResp
         val jsonObject = json?.asJsonObject
 
         val id = jsonObject?.get("id")?.asString
+        val userId = jsonObject?.get("user_id")?.asString
+        val durasiMenit = jsonObject?.get("durasi_menit")?.asInt
         val jenis = jsonObject?.get("jenis")?.asString
         val name = jsonObject?.get("name")?.asString
-        val durasiMenit = jsonObject?.get("durasi_menit")?.asInt
         val calorie = jsonObject?.get("calorie")?.asInt
+        val restaurant = jsonObject?.get("restaurant")?.asString
+        val menu = jsonObject?.get("menu")?.asString
+        val quantity = jsonObject?.get("quantity")?.asInt
         val createdAt = jsonObject?.get("created_at")?.asString
 
-        return HistoryActivityResponse(id, jenis, name, durasiMenit, calorie, createdAt)
+        return HistoryActivityResponse(id, userId, durasiMenit, jenis, name, calorie, restaurant, menu, quantity, createdAt)
     }
 }
 
 
 data class HistoryActivityResponse(
     @field:SerializedName("id")
-    val id: String?,
+    val idActivity: String?,
+
+    @field:SerializedName("user_id")
+    val userId: String?,
+
+    @field:SerializedName("durasi_menit")
+    val durasiMenit: Int?,
 
     @field:SerializedName("jenis")
     val jenis: String?,
@@ -38,11 +48,17 @@ data class HistoryActivityResponse(
     @field:SerializedName("name")
     val name: String?,
 
-    @field:SerializedName("durasi_menit")
-    val durasiMenit: Int?,
-
     @field:SerializedName("calorie")
     val calorie: Int?,
+
+    @field:SerializedName("restaurant")
+    val restaurant: String?,
+
+    @field:SerializedName("menu")
+    val menu: String?,
+
+    @field:SerializedName("quantity")
+    val quantity: Int?,
 
     @field:SerializedName("created_at")
     val createdAt: String?

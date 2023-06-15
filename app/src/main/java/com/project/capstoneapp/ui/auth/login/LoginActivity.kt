@@ -71,16 +71,17 @@ class LoginActivity : AppCompatActivity() {
                                 lifecycleScope.launch {
                                     loginViewModel.saveLoginSession(userId, userToken.toString(), it)
                                 }
+
+                                Intent(
+                                    this@LoginActivity,
+                                    BottomMainActivity::class.java
+                                ).also { intentToMain ->
+                                    intentToMain.flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intentToMain)
+                                    finish()
+                                }
                             }
-                        }
-                        Intent(
-                            this@LoginActivity,
-                            BottomMainActivity::class.java
-                        ).also { intentToMain ->
-                            intentToMain.flags =
-                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intentToMain)
-                            finish()
                         }
                     } else {
                         val errorMessage = tokenTask.exception?.message
